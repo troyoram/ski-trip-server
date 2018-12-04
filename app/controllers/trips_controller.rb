@@ -1,21 +1,22 @@
 # frozen_string_literal: true
 
-class TripsController < OpenReadController
-  before_action :set_trip, only: %i[update destroy]
-  # before_action :set_trip, only: %i[update destroy show]
+# class TripsController < OpenReadController
+class TripsController < ProtectedController
+  # before_action :set_trip, only: %i[update destroy]
+  before_action :set_trip, only: %i[update destroy show]
 
   # GET /trips
   def index
-    @trips = Trip.all
+    # @trips = Trip.all
     # console.log('index() current_user.trips = ' + current_user.trips)
-    # @trips = current_user.trips
+    @trips = current_user.trips
     render json: @trips
   end
 
   # GET /trips/1
   def show
-    render json: Trip.find(params[:id])
-    # render json: @trip
+    # render json: Trip.find(params[:id])
+    render json: @trip
   end
 
   # POST /trips
